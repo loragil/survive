@@ -1,0 +1,100 @@
+NEXT TASKS
+----------
+1. Git Git Git.
+2. place multiple explorers on the same space:
+  a. create a 'bubble' for in-tile control.
+
+3. up to a total of 3 land...
+   a. allow ending the turn. (eg. by clicking a button).
+
+4. create new entities:
+	a. boat
+	b. monsters
+
+Phase 2: Move People and/or Boat Tokens
+---------------------------------------
+1. you may move your People and/or Boat tokens up to a total of 3 land or sea spaces.
+2. you may swim or use a boat to have your People tokens reach the Safe Islands.
+
+*** People:
+ 1. move from adjacent: land tile to land tile; or from land tile to boat; or from boat to boat.
+ 2. multiple People tokens may occupy the same space.
+ 3. once a People token leaves the island (by boat or swimming), it cannot return.
+
+
+*** Swimmers:
+ 1. a. People tokens become swimmers by: moving from land space to adjacent sea space; 
+    b. jumping overboard from a boat into that sea space; 
+	c. by falling into the sea when a land tile is removed; 
+	d. or when their boat is capsized by a Whale. 
+ 2. can only move one sea space per turn, and moving into the water counts as one move. 
+ 3. multiple swimmers may occupy the same space.
+ 4. swimmers can jump into boats in the same sea space if there is enough room in the boat. 
+ 5. if a swimmer moves into a space with a Sea Serpent or Shark, it is immediately lost. 
+
+
+*** Boats
+ 1. any player may move any unoccupied boat from sea space to sea space. 
+ 2. only one boat may occupy a sea space at a time.
+ 3. each boat can only carry 3 People tokens, regardless of who controls them. 
+ 4. you must have a majority on the boat to control/move it. For ties, both players control it.
+ 5. if you move a boat into a space occupied by a Creature, then…
+    * Sea Serpent: the boat and all People tokens aboard are removed from the game.
+    * Whale: the boat is removed from the game and the People become swimmers.
+    * Shark: the swimmers are removed from the game.
+
+
+-- add more tests!!!
+
+
+create movement system:
+-----------------------
+
+- multiple objects on the same tile
+
+- use require-js
+
+- organize to do list into:
+    * next task/s (now)
+    * todo (next)
+    * wish-list (sometime in the future, maybe..)
+
+- animate the sea tiles.
+
+--!! refactoring
+-- animation.
+
+
+Tests:
+-------
+* add unit tests. - Casper.  (UI)
+
+
+Set - Up Scene:
+===============
+*** create the first scene in the game- Set - Up ***
+1. place the 5 Sea Serpent tokens on the five spaces marked with Sea Serpents on the board.
+2. separate land tiles into piles (beach, forest, mountain) and randomly place them into sea spaces.
+3. each player picks a color and receives 10 people tokens, and 2 boats. Pick a starting player.
+4. players take turns placing one People token on any unoccupied land token. Continue for all 10.
+5. players take turns placing one Boat token on any unoccupied sea space next to land tile. Repeat.
+-- once the game begins, players may not look at or reveal point values of their People tokens.
+
+
+
+
+
+
+
+-----------------------------
+/*
+stage.insert(rippleFX);
+        rippleFX = ripple('https://c9.io/loragil/survive/workspace/images/waterBG.png', document.getElementById('quintus'));
+
+        // generate random ripples
+          var rnd = Math.random;
+          setInterval(function () {
+              rippleFX.disturb(rnd() * Q.el.width, rnd() * Q.el.height);
+          }, 700);
+*/
+-----------------------------

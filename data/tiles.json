@@ -1,0 +1,74 @@
+﻿{
+    "seaTile1": {
+        "sx": 455,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames":1
+    },
+    "seaTile2": {
+        "sx": 455,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames":1
+    },
+    "volcanoTile": {
+        "sx": 390,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames": 1
+    },
+    "mountainTile1": {
+        "sx": 260,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames": 1
+    },
+    "mountainTile2": {
+        "sx": 325,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames": 1
+    },
+    "beachTile1": {
+        "sx": 0,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames": 1
+    },
+    "beachTile2": {
+        "sx": 65,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames": 1
+    },
+    "forestTile1": {
+        "sx": 130,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames": 1
+    },
+    "forestTile2": {
+        "sx": 195,
+        "sy": 0,
+        "cols": 1,
+        "tilew": 65,
+        "tileh": 75,
+        "frames": 1
+    }
+}

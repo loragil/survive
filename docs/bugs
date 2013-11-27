@@ -1,0 +1,1 @@
+-- the distance calculation doesn't skip tiles that were not drown. (on the edges)

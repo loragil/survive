@@ -1,0 +1,23 @@
+ * current map legend:
+    - volcanoTile => tile not on map
+    - seaTile => sea
+    - forestTile => island
+    - beachTile => sea monster
+    - mountainTile => escape islands
+
+    * game reviews:
+    - http://www.youtube.com/watch?v=R31hK2IQZsk
+    - http://www.youtube.com/watch?v=ebFM_SGpVuc
+
+	* hexa party:
+	- http://www.redblobgames.com/grids/hexagons/
+
+	- distance calculations.
+	- http://keekerdc.com/2011/03/hexagon-grids-coordinate-systems-and-distance-calculations/
+	- http://stackoverflow.com/questions/5084801/distance-between-tiles-in-a-hexagonal-field
+
+	* real-time backend
+	- https://www.firebase.com/index.html
+
+	* game rules:
+	- https://www.dropbox.com/s/3clg4ch2xg9pwpk/Survive%21_Rules_%282_pages%29.doc
