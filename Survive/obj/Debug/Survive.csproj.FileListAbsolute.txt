@@ -1,0 +1,5 @@
+D:\Tal\Documents\GitHub\survive\Survive\bin\Survive.dll
+D:\Tal\Documents\GitHub\survive\Survive\bin\Survive.pdb
+D:\Tal\Documents\GitHub\survive\Survive\obj\Debug\Survive.csprojResolveAssemblyReference.cache
+D:\Tal\Documents\GitHub\survive\Survive\obj\Debug\Survive.dll
+D:\Tal\Documents\GitHub\survive\Survive\obj\Debug\Survive.pdb
