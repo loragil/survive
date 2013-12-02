@@ -3,3 +3,8 @@ D:\Tal\Documents\GitHub\survive\Survive\bin\Survive.pdb
 D:\Tal\Documents\GitHub\survive\Survive\obj\Debug\Survive.csprojResolveAssemblyReference.cache
 D:\Tal\Documents\GitHub\survive\Survive\obj\Debug\Survive.dll
 D:\Tal\Documents\GitHub\survive\Survive\obj\Debug\Survive.pdb
+C:\Users\Gil\Dropbox\Projects\Game dev\survive\Survive\bin\Survive.dll
+C:\Users\Gil\Dropbox\Projects\Game dev\survive\Survive\bin\Survive.pdb
+C:\Users\Gil\Dropbox\Projects\Game dev\survive\Survive\obj\Debug\Survive.csprojResolveAssemblyReference.cache
+C:\Users\Gil\Dropbox\Projects\Game dev\survive\Survive\obj\Debug\Survive.dll
+C:\Users\Gil\Dropbox\Projects\Game dev\survive\Survive\obj\Debug\Survive.pdb

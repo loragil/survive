@@ -5,6 +5,7 @@ window.addEventListener('load', function (ee) {
 
     Q.SPRITE_EXPLORER = 1024;
     Q.SPRITE_TILE = 2048;
+    Q.SPRITE_BOAT = 4096;
 
     // render the sprites' collision meshes
     //Q.debug = true;
@@ -12,6 +13,21 @@ window.addEventListener('load', function (ee) {
 
     Q.setup({ width: game.config.canvas.width, height: game.config.canvas.height })
      .touch(Q.SPRITE_ALL);
+
+ Q.Sprite.extend("Boat", {
+    init: function (p) {
+        p = this.createBoat(p);
+        this._super(p);
+        //this.on("tileSelected", this, "onTileSelected");
+    },
+    createBoat: function (p) {
+        p = p || {};
+        p.sheet = "boat";
+        p.type = Q.SPRITE_BOAT;
+        p.movements = 3;
+        return p;
+    }
+ });
 
     Q.Sprite.extend("Tile", {
         init: function (p) {
@@ -76,7 +92,7 @@ window.addEventListener('load', function (ee) {
             var animation = p.playerId === 'misha123' ? 'default' : 'red';
             return animation;
         },
-        
+
         onExplorerSelected: function (explorer) {
             game.stateMgr.selectExplorer(explorer);
             game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), explorer.p.coords);
@@ -112,9 +128,10 @@ window.addEventListener('load', function (ee) {
         game.dev.initState();
     }));
 
-    Q.load(["tiles.json", "tileset.png", "map.json", "explorer.png", "explorer.json", "waterBG.png"], function () {
+    Q.load(["tiles.json", "tileset.png", "map.json", "explorer.png", "explorer.json", "waterBG.png", "boat.png", "boat.json"], function () {
         Q.compileSheets("tileset.png", "tiles.json");
         Q.compileSheets("explorer.png", "explorer.json");
+        Q.compileSheets("boat.png", "boat.json");
         Q.animations("explorer", {
             default: { frames: [1], rate: 1 / 1 },
             red: { frames: [0], rate: 1 / 1 },
@@ -126,12 +143,12 @@ window.addEventListener('load', function (ee) {
     Q.el.addEventListener('click', function (e) {
 
         // - should be tested with more than one player clicking at the same time.
-        
+
         //var currentPlayerId = Q.state.get('currentPlayerId');
         //if (!game.stateMgr.isCurrentPlayerTurn(currentPlayerId)) {
         //    return;
         //}
-        
+
         // todo: extract to function. 'toStagePosition(e)' -> returns coords
         var x = e.offsetX || e.layerX,
             y = e.offsetY || e.layerY,

@@ -102,6 +102,7 @@
     <Content Include="docs\todo-or-not-todo" />
     <Content Include="docs\wiki" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="data\boat.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
