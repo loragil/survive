@@ -1,12 +1,38 @@
 ﻿game.stateMgr = function () {
     var selectedExplorer = null,
+        selectedBoat = null,
+        selectedEntity = null,
 
     getSelectedExplorer = function () {
         return selectedExplorer;
     },
-
-    selectExplorer = function (explorer) {
+    setSelectedExplorer = function (explorer) {
         selectedExplorer = explorer;
+        selectedBoat = null;
+    },
+
+    getSelectedBoat = function () {
+        return selectedBoat;
+    },
+    setSelectedBoat = function (boat) {
+        selectedBoat = boat;
+        selectedExplorer = null;
+    },
+
+    getSelectedEntity = function () {
+        var entity = null;
+
+        if (selectedExplorer !== null) {
+            entity = selectedExplorer;
+        }
+        else if (selectedBoat !== null) {
+            entity = selectedBoat;
+        }
+
+        return entity;
+    },
+    setSelectedEntity = function (entity) {
+        selectedEntity = entity;
     },
 
     moveToTile = function (entity, targetTile) {
@@ -21,37 +47,37 @@
         var players = Q.state.get('players');                 // todo: refactor - remove dependency
 
         var nextPlayerId = getNextPlayerId(currentPlayerId, players);
-        
+
         Q.state.set('currentPlayerId', nextPlayerId);         // todo: refactor - remove dependency
         Q.state.set('playerMovementsLeft', 3);                // todo: refactor - remove dependency
     },
-        
+
     isCurrentPlayerObj = function (obj) {
         var currentPlayer = getCurrentPlayer();
         return obj && obj.p && currentPlayer.id === obj.p.playerId;
     },
-        
-    decPlayerMovements = function (movements, explorer) {
+
+    decPlayerMovements = function (movements, entity) {
         Q.state.dec('playerMovementsLeft', movements);        // todo: refactor - remove dependency
-        onPlayerMovementsDec(explorer);
+        onPlayerMovementsDec(entity);
     },
 
     isCurrentPlayerTurn = function (playerId) {
         return getCurrentPlayer().id === playerId;
     },
-        
+
     markTargetTiles = function (range, startHex) {
         resetAllTiles();
         var allTiles = Q("Tile").items;
         var targetTiles = game.mapUtils.getTilesInRange(allTiles, range, { coords: startHex });
-        
+
         for (var i = 0; i < targetTiles.length; i++) {
             targetTiles[i].p.scale = 0.9;
-            
+
             // todo: raise tileMarkedEvent
         }
     },
-        
+
     resetAllTiles = function () {
         var allTiles = Q("Tile").items;
         for (var i = 0; i < allTiles.length; i++) {
@@ -69,7 +95,7 @@
             }
         }
     },
-        
+
     getCurrentPlayer = function () {
         var currentPlayerId = Q.state.get('currentPlayerId'); // todo: refactor - remove dependency
         var players = Q.state.get('players');                 // todo: refactor - remove dependency
@@ -79,20 +105,24 @@
             }
         }
     },
-        
-    onPlayerMovementsDec = function (explorer) {
+
+    onPlayerMovementsDec = function (entity) {
         var movementsLeft = Q.state.get('playerMovementsLeft');       // todo: refactor - remove dependency
-        
+
         if (movementsLeft < 1) {
-            explorer.trigger('endTurn', explorer); // todo: consider passing as a callback
+            entity.trigger('endTurn', entity); // todo: consider passing as a callback
         } else {
-            markTargetTiles(movementsLeft, explorer.p.coords);
+            markTargetTiles(movementsLeft, entity.p.coords);
         }
     };
 
     return {
-        selectExplorer: selectExplorer,
+        setSelectedExplorer: setSelectedExplorer,
         getSelectedExplorer: getSelectedExplorer,
+        setSelectedBoat: setSelectedBoat,
+        getSelectedBoat: getSelectedBoat,
+        setSelectedEntity: setSelectedEntity,
+        getSelectedEntity: getSelectedEntity,
         moveToTile: moveToTile,
         isCurrentPlayerObj: isCurrentPlayerObj,
         //getCurrentPlayer: getCurrentPlayer,

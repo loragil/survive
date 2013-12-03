@@ -18,14 +18,28 @@ window.addEventListener('load', function (ee) {
     init: function (p) {
         p = this.createBoat(p);
         this._super(p);
-        //this.on("tileSelected", this, "onTileSelected");
+        this.on("boatSelected", this, "onBoatSelected");
+        this.on("endTurn", this, "onEndTurn");
     },
     createBoat: function (p) {
         p = p || {};
         p.sheet = "boat";
+        p.sprite = "boat";
         p.type = Q.SPRITE_BOAT;
         p.movements = 3;
         return p;
+    },
+
+    onBoatSelected: function (boat) {
+        game.stateMgr.setSelectedBoat(boat);
+        game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), boat.p.coords);
+    },
+
+    onEndTurn: function (boat) {
+        game.logger.log(boat.p.playerId + ' turn ended.');
+        game.stateMgr.setNextPlayer();
+        game.stateMgr.setSelectedBoat(null);
+        game.stateMgr.resetAllTiles();
     }
  });
 
@@ -45,14 +59,15 @@ window.addEventListener('load', function (ee) {
 
         onTileSelected: function (tile) {
             // todo: refactor!
-            var explorer = game.stateMgr.getSelectedExplorer();
+            var entity = game.stateMgr.getSelectedEntity();
+            //var explorer = game.stateMgr.getSelectedExplorer();
             var movementsLeft = Q.state.get('playerMovementsLeft');
-            if (explorer && game.mapUtils.isValidMovement(explorer, tile.p.coords, movementsLeft)) {
+            if (entity && game.mapUtils.isValidMovement(entity, tile.p.coords, movementsLeft)) {
                 game.logger.log("[ " + tile.p.coords.x + ", " + tile.p.coords.y + "]");
 
-                var distance = game.mapUtils.getDistance(explorer.p.coords, tile.p.coords);
-                game.stateMgr.moveToTile(explorer, tile);
-                game.stateMgr.decPlayerMovements(distance, explorer);
+                var distance = game.mapUtils.getDistance(entity.p.coords, tile.p.coords);
+                game.stateMgr.moveToTile(entity, tile);
+                game.stateMgr.decPlayerMovements(distance, entity);
             }
         },
 
@@ -94,14 +109,14 @@ window.addEventListener('load', function (ee) {
         },
 
         onExplorerSelected: function (explorer) {
-            game.stateMgr.selectExplorer(explorer);
+            game.stateMgr.setSelectedExplorer(explorer);
             game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), explorer.p.coords);
         },
 
         onEndTurn: function (explorer) {
             game.logger.log(explorer.p.playerId + ' turn ended.');
             game.stateMgr.setNextPlayer();
-            game.stateMgr.selectExplorer(null);
+            game.stateMgr.setSelectedExplorer(null);
             game.stateMgr.resetAllTiles();
         },
 
@@ -164,9 +179,15 @@ window.addEventListener('load', function (ee) {
             obj.trigger("explorerSelected", obj);
         }
         else {
-            obj = stage.locate(stageX, stageY, Q.SPRITE_TILE);
-            if (obj) {
-                obj.trigger("tileSelected", obj);
+            obj = stage.locate(stageX, stageY, Q.SPRITE_BOAT);
+            if (obj && game.stateMgr.isCurrentPlayerObj(obj)) {
+                obj.trigger("boatSelected", obj);
+            }
+            else {
+                obj = stage.locate(stageX, stageY, Q.SPRITE_TILE);
+                if (obj) {
+                    obj.trigger("tileSelected", obj);
+                }
             }
         }
     });

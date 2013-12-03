@@ -9,11 +9,12 @@
         var exp = new Q.Explorer({ playerId: 'yoyo11', x: position.x, y: position.y });
         var exp2 = new Q.Explorer({ playerId: 'misha123', x: position2.x, y: position2.y });
         var exp3 = new Q.Explorer({ playerId: 'misha123', x: position3.x, y: position3.y });
-        var boat = new Q.Boat({ x: position4.x, y: position4.y });
+        var boat = new Q.Boat({ playerId: 'yoyo11', x: position4.x, y: position4.y });
 
         exp.p.coords = { x: 0, y: 0 };
         exp2.p.coords = { x: 2, y: 2 };
         exp3.p.coords = { x: 3, y: 3 };
+        boat.p.coords = { x: 2, y: 3 };
         stage.insert(exp);
         stage.insert(exp2);
         stage.insert(exp3);

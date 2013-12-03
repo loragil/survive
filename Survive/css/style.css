@@ -1,4 +1,6 @@
 ﻿canvas {
     background-color:#94ab93;
     border: 1px solid #000000;
+    -webkit-user-select: none;
+    user-select: none;
 }
