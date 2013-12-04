@@ -60,12 +60,9 @@ window.addEventListener('load', function (ee) {
         },
 
         step: function (dt) {
+            // example of using a flag on update.
             if (this.p.over) {
                 this.p.over = false;
-
-                if (this.p.coords) {
-                    game.logger.log("[ " + this.p.coords.x + ", " + this.p.coords.y + "]");
-                }
             }
         }
     });
@@ -132,39 +129,20 @@ window.addEventListener('load', function (ee) {
     });
 
     Q.el.addEventListener('click', function (e) {
-
-        // - should be tested with more than one player clicking at the same time.
-
+        // todo: should be tested with more than one player clicking at the same time.
         //var currentPlayerId = Q.state.get('currentPlayerId');
         //if (!game.stateMgr.isCurrentPlayerTurn(currentPlayerId)) {
         //    return;
         //}
-
-        // todo: extract to function. 'toStagePosition(e)' -> returns coords
-        var x = e.offsetX || e.layerX,
-            y = e.offsetY || e.layerY,
-            stage = Q.stage(0);
-
-        var stageX = Q.canvasToStageX(x, stage),
-            stageY = Q.canvasToStageY(y, stage);
-
-
-        // todo: extract to function.
-        var obj = stage.locate(stageX, stageY, Q.SPRITE_EXPLORER);
-        if (obj && game.stateMgr.isCurrentPlayerObj(obj)) {
-            obj.trigger("entitySelected", obj);
+        
+        var pos = game.stageHelper.toStagePosition(e);
+        var obj = game.stageHelper.tryGetObject(pos.x, pos.y);
+        
+        if (!obj) {
+            return;
         }
-        else {
-            obj = stage.locate(stageX, stageY, Q.SPRITE_BOAT);
-            if (obj && game.stateMgr.isCurrentPlayerObj(obj)) {
-                obj.trigger("entitySelected", obj);
-            }
-            else {
-                obj = stage.locate(stageX, stageY, Q.SPRITE_TILE);
-                if (obj) {
-                    obj.trigger("tileSelected", obj);
-                }
-            }
-        }
+
+        game.stateMgr.onObjectClicked(obj);
+
     });
 });

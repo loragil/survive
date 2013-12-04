@@ -1,15 +1,15 @@
 NEXT TASKS
 ----------
-1. Git Git Git.
-2. place multiple explorers on the same space:
+0. Tests?
+
+1. place multiple explorers on the same space:
   a. create a 'bubble' for in-tile control.
 
-3. up to a total of 3 land...
+2. up to a total of 3 land...
    a. allow ending the turn. (eg. by clicking a button).
 
-4. create new entities:
-	a. boat
-	b. monsters
+3. create new entities:
+	a. monsters
 
 Phase 2: Move People and/or Boat Tokens
 ---------------------------------------
