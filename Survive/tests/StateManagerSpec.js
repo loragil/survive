@@ -3,29 +3,29 @@ describe("game.stateMgr", function () {
 
     beforeEach(function () {
         stateMgr = game.stateMgr;
-        stateMgr.setSelectedExplorer(null);
+        stateMgr.setSelectedEntity(null);
     });
 
-    it("should return null for the selected explorer when called for the first time.", function () {
-        var exp = stateMgr.getSelectedExplorer();
-        expect(exp).toBeNull();
+    it("should return null for the selected entity when called for the first time.", function () {
+        var entity = stateMgr.getSelectedEntity();
+        expect(entity).toBeNull();
     });
     
-    it("should return the explorer if is exists.", function () {
-        var exp = stateMgr.getSelectedExplorer();
-        expect(exp).toBeNull();
-        stateMgr.setSelectedExplorer({});
-        exp = stateMgr.getSelectedExplorer();
-        expect(exp).not.toBeNull();
+    it("should return the entity if is exists.", function () {
+        var entity = stateMgr.getSelectedEntity();
+        expect(entity).toBeNull();
+        stateMgr.setSelectedEntity({});
+        entity = stateMgr.getSelectedEntity();
+        expect(entity).not.toBeNull();
     });
     
 
-    // the tests fail without a call to 'stateMgr.setSelectedExplorer(null)' in the beforeEach section
+    // the tests fail without a call to 'stateMgr.setSelectedEntity(null)' in the beforeEach section
     // we should rethink how we want this object to behave. 
     // maybe a reset() function.
-    it("should return null again for the selected explorer. when first initialized.", function () {
-        var exp = stateMgr.getSelectedExplorer();
-        expect(exp).toBeNull();
+    it("should return null again for the selected entity. when first initialized.", function () {
+        var entity = stateMgr.getSelectedEntity();
+        expect(entity).toBeNull();
     });
 });
 

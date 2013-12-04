@@ -122,6 +122,7 @@
 
     return {
         getSelectedEntity: getSelectedEntity,
+        setSelectedEntity: setSelectedEntity,
         moveToTile: moveToTile,
         isCurrentPlayerTurn: isCurrentPlayerTurn,
         decPlayerMovements: decPlayerMovements,
