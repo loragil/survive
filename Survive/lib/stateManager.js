@@ -60,14 +60,15 @@
         
     onEndTurn = function (entity) {
         game.logger.log(entity.p.playerId + ' turn ended.');
-        game.stateMgr.setNextPlayer();
-        game.stateMgr.setSelectedEntity(null);
-        game.stateMgr.resetAllTiles();
+        setNextPlayer();
+        setSelectedEntity(null);
+        resetAllTiles();
     },
         
+    // todo: find a better file for this function
     onEntitySelected = function(entity) {
-        game.stateMgr.setSelectedEntity(entity);
-        game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), entity.p.coords);
+        setSelectedEntity(entity);
+        markTargetTiles(Q.state.get('playerMovementsLeft'), entity.p.coords);
     },
 
     // todo: find a better file for this function
@@ -75,7 +76,7 @@
         switch (obj.p.type) {
             case Q.SPRITE_EXPLORER:
             case Q.SPRITE_BOAT:
-                if (game.stateMgr.isCurrentPlayerObject(obj)) {
+                if (isCurrentPlayerObject(obj)) {
                     obj.trigger("entitySelected", obj);
                 }
                 break;
@@ -120,15 +121,10 @@
     };
 
     return {
-        setSelectedEntity: setSelectedEntity,
         getSelectedEntity: getSelectedEntity,
         moveToTile: moveToTile,
-        isCurrentPlayerObject: isCurrentPlayerObject,
-        //getCurrentPlayer: getCurrentPlayer,
         isCurrentPlayerTurn: isCurrentPlayerTurn,
-        setNextPlayer: setNextPlayer,
         decPlayerMovements: decPlayerMovements,
-        markTargetTiles: markTargetTiles,
         resetAllTiles: resetAllTiles,
         onEndTurn: onEndTurn,
         onEntitySelected: onEntitySelected,

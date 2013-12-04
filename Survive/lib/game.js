@@ -50,7 +50,7 @@ window.addEventListener('load', function (ee) {
             // todo: refactor!
             var entity = game.stateMgr.getSelectedEntity();
             var movementsLeft = Q.state.get('playerMovementsLeft');
-            if (entity && game.mapUtils.isValidMovement(entity, tile.p.coords, movementsLeft)) {
+            if (entity && game.mapUtils.isValidMovement(entity, tile, movementsLeft)) {
                 game.logger.log("[ " + tile.p.coords.x + ", " + tile.p.coords.y + "]");
 
                 var distance = game.mapUtils.getDistance(entity.p.coords, tile.p.coords);

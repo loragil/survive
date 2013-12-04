@@ -32,9 +32,16 @@
             }
         },
 
-        isValidMovement = function (explorer, to, movementsLeft) {
-            var distance = getDistance(explorer.p.coords, to);
-            return explorer.p.movements >= distance && movementsLeft >= distance;
+        isValidMovement = function (entity, tile, movementsLeft) {
+            var distance = getDistance(entity.p.coords, tile.p.coords);
+            var isValidDistance = entity.p.movements >= distance && movementsLeft >= distance;
+
+            // todo: refactor
+            var isValidTile = (tile.p.sheet !== '') &&
+                            ((entity.p.type === Q.SPRITE_EXPLORER && tile.p.sheet.substring(0, 3) !== 'sea') ||
+                            (entity.p.type === Q.SPRITE_BOAT && tile.p.sheet.substring(0, 3) === 'sea'));
+            
+            return isValidDistance && isValidTile;
         },
 
         getTilesInRange = function (tiles, range, startHex) {
