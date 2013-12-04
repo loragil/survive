@@ -1,35 +1,8 @@
 ﻿game.stateMgr = function () {
-    var selectedExplorer = null,
-        selectedBoat = null,
-        selectedEntity = null,
-
-    getSelectedExplorer = function () {
-        return selectedExplorer;
-    },
-    setSelectedExplorer = function (explorer) {
-        selectedExplorer = explorer;
-        selectedBoat = null;
-    },
-
-    getSelectedBoat = function () {
-        return selectedBoat;
-    },
-    setSelectedBoat = function (boat) {
-        selectedBoat = boat;
-        selectedExplorer = null;
-    },
+    var selectedEntity = null,
 
     getSelectedEntity = function () {
-        var entity = null;
-
-        if (selectedExplorer !== null) {
-            entity = selectedExplorer;
-        }
-        else if (selectedBoat !== null) {
-            entity = selectedBoat;
-        }
-
-        return entity;
+        return selectedEntity;
     },
     setSelectedEntity = function (entity) {
         selectedEntity = entity;
@@ -117,10 +90,6 @@
     };
 
     return {
-        setSelectedExplorer: setSelectedExplorer,
-        getSelectedExplorer: getSelectedExplorer,
-        setSelectedBoat: setSelectedBoat,
-        getSelectedBoat: getSelectedBoat,
         setSelectedEntity: setSelectedEntity,
         getSelectedEntity: getSelectedEntity,
         moveToTile: moveToTile,

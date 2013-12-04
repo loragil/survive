@@ -31,14 +31,14 @@ window.addEventListener('load', function (ee) {
     },
 
     onBoatSelected: function (boat) {
-        game.stateMgr.setSelectedBoat(boat);
+        game.stateMgr.setSelectedEntity(boat);
         game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), boat.p.coords);
     },
 
     onEndTurn: function (boat) {
         game.logger.log(boat.p.playerId + ' turn ended.');
         game.stateMgr.setNextPlayer();
-        game.stateMgr.setSelectedBoat(null);
+        game.stateMgr.setSelectedEntity(null);
         game.stateMgr.resetAllTiles();
     }
  });
@@ -60,7 +60,6 @@ window.addEventListener('load', function (ee) {
         onTileSelected: function (tile) {
             // todo: refactor!
             var entity = game.stateMgr.getSelectedEntity();
-            //var explorer = game.stateMgr.getSelectedExplorer();
             var movementsLeft = Q.state.get('playerMovementsLeft');
             if (entity && game.mapUtils.isValidMovement(entity, tile.p.coords, movementsLeft)) {
                 game.logger.log("[ " + tile.p.coords.x + ", " + tile.p.coords.y + "]");
@@ -109,14 +108,14 @@ window.addEventListener('load', function (ee) {
         },
 
         onExplorerSelected: function (explorer) {
-            game.stateMgr.setSelectedExplorer(explorer);
+            game.stateMgr.setSelectedEntity(explorer);
             game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), explorer.p.coords);
         },
 
         onEndTurn: function (explorer) {
             game.logger.log(explorer.p.playerId + ' turn ended.');
             game.stateMgr.setNextPlayer();
-            game.stateMgr.setSelectedExplorer(null);
+            game.stateMgr.setSelectedEntity(null);
             game.stateMgr.resetAllTiles();
         },
 
