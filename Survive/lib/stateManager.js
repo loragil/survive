@@ -57,6 +57,18 @@
             allTiles[i].p.scale = 1;
         }
     },
+        
+    onEndTurn = function (entity) {
+        game.logger.log(entity.p.playerId + ' turn ended.');
+        game.stateMgr.setNextPlayer();
+        game.stateMgr.setSelectedEntity(null);
+        game.stateMgr.resetAllTiles();
+    },
+        
+    onEntitySelected = function(entity) {
+        game.stateMgr.setSelectedEntity(entity);
+        game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), entity.p.coords);
+    },
 
     /************** private methods ****************/
 
@@ -99,6 +111,8 @@
         setNextPlayer: setNextPlayer,
         decPlayerMovements: decPlayerMovements,
         markTargetTiles: markTargetTiles,
-        resetAllTiles: resetAllTiles
+        resetAllTiles: resetAllTiles,
+        onEndTurn: onEndTurn,
+        onEntitySelected: onEntitySelected
     };
 }();

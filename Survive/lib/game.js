@@ -18,9 +18,10 @@ window.addEventListener('load', function (ee) {
     init: function (p) {
         p = this.createBoat(p);
         this._super(p);
-        this.on("boatSelected", this, "onBoatSelected");
-        this.on("endTurn", this, "onEndTurn");
+        this.on("entitySelected", this, game.stateMgr.onEntitySelected);
+        this.on("endTurn", this, game.stateMgr.onEndTurn);
     },
+    
     createBoat: function (p) {
         p = p || {};
         p.sheet = "boat";
@@ -28,18 +29,6 @@ window.addEventListener('load', function (ee) {
         p.type = Q.SPRITE_BOAT;
         p.movements = 3;
         return p;
-    },
-
-    onBoatSelected: function (boat) {
-        game.stateMgr.setSelectedEntity(boat);
-        game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), boat.p.coords);
-    },
-
-    onEndTurn: function (boat) {
-        game.logger.log(boat.p.playerId + ' turn ended.');
-        game.stateMgr.setNextPlayer();
-        game.stateMgr.setSelectedEntity(null);
-        game.stateMgr.resetAllTiles();
     }
  });
 
@@ -85,8 +74,8 @@ window.addEventListener('load', function (ee) {
         init: function (p) {
             p = this.createExplorer(p);
             this._super(p);
-            this.on("explorerSelected", this, "onExplorerSelected");
-            this.on("endTurn", this, "onEndTurn");
+            this.on("entitySelected", this, game.stateMgr.onEntitySelected);
+            this.on("endTurn", this, game.stateMgr.onEndTurn);
             this.add("animation");
             var animation = this.getAnimation(p);
             this.play(animation);
@@ -105,18 +94,6 @@ window.addEventListener('load', function (ee) {
         getAnimation: function (p) {
             var animation = p.playerId === 'misha123' ? 'default' : 'red';
             return animation;
-        },
-
-        onExplorerSelected: function (explorer) {
-            game.stateMgr.setSelectedEntity(explorer);
-            game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), explorer.p.coords);
-        },
-
-        onEndTurn: function (explorer) {
-            game.logger.log(explorer.p.playerId + ' turn ended.');
-            game.stateMgr.setNextPlayer();
-            game.stateMgr.setSelectedEntity(null);
-            game.stateMgr.resetAllTiles();
         },
 
         step: function (dt) {
@@ -175,12 +152,12 @@ window.addEventListener('load', function (ee) {
         // todo: extract to function.
         var obj = stage.locate(stageX, stageY, Q.SPRITE_EXPLORER);
         if (obj && game.stateMgr.isCurrentPlayerObj(obj)) {
-            obj.trigger("explorerSelected", obj);
+            obj.trigger("entitySelected", obj);
         }
         else {
             obj = stage.locate(stageX, stageY, Q.SPRITE_BOAT);
             if (obj && game.stateMgr.isCurrentPlayerObj(obj)) {
-                obj.trigger("boatSelected", obj);
+                obj.trigger("entitySelected", obj);
             }
             else {
                 obj = stage.locate(stageX, stageY, Q.SPRITE_TILE);
