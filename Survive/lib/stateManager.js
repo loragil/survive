@@ -25,7 +25,7 @@
         Q.state.set('playerMovementsLeft', 3);                // todo: refactor - remove dependency
     },
 
-    isCurrentPlayerObj = function (obj) {
+    isCurrentPlayerObject = function (obj) {
         var currentPlayer = getCurrentPlayer();
         return obj && obj.p && currentPlayer.id === obj.p.playerId;
     },
@@ -70,6 +70,24 @@
         game.stateMgr.markTargetTiles(Q.state.get('playerMovementsLeft'), entity.p.coords);
     },
 
+    // todo: find a better file for this function
+    onObjectClicked = function (obj) {
+        switch (obj.p.type) {
+            case Q.SPRITE_EXPLORER:
+            case Q.SPRITE_BOAT:
+                if (game.stateMgr.isCurrentPlayerObject(obj)) {
+                    obj.trigger("entitySelected", obj);
+                }
+                break;
+            case Q.SPRITE_TILE:
+                obj.trigger("tileSelected", obj);
+                break;
+            default:
+                // throw?
+                break;
+        }
+    },
+        
     /************** private methods ****************/
 
     getNextPlayerId = function (currentPlayerId, players) {
@@ -105,7 +123,7 @@
         setSelectedEntity: setSelectedEntity,
         getSelectedEntity: getSelectedEntity,
         moveToTile: moveToTile,
-        isCurrentPlayerObj: isCurrentPlayerObj,
+        isCurrentPlayerObject: isCurrentPlayerObject,
         //getCurrentPlayer: getCurrentPlayer,
         isCurrentPlayerTurn: isCurrentPlayerTurn,
         setNextPlayer: setNextPlayer,
@@ -113,6 +131,7 @@
         markTargetTiles: markTargetTiles,
         resetAllTiles: resetAllTiles,
         onEndTurn: onEndTurn,
-        onEntitySelected: onEntitySelected
+        onEntitySelected: onEntitySelected,
+        onObjectClicked: onObjectClicked
     };
 }();
