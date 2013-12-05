@@ -40,8 +40,23 @@
             var isValidTile = (tile.p.sheet !== '') &&
                             ((entity.p.type === Q.SPRITE_EXPLORER && tile.p.sheet.substring(0, 3) !== 'sea') ||
                             (entity.p.type === Q.SPRITE_BOAT && tile.p.sheet.substring(0, 3) === 'sea'));
+
+            if (entity.p.type === Q.SPRITE_BOAT) {
+                return isValidDistance && isValidTile && !tileContainsBoat(tile.p.coords);
+            }
             
             return isValidDistance && isValidTile;
+        },
+        
+        tileContainsBoat = function (tileCoords) {
+            var boats = Q("Boat").items;
+            for (var i = 0; i < boats.length; i++) {
+                var boatCoords = boats[i].p.coords;
+                if (boatCoords.x === tileCoords.x && boatCoords.y === tileCoords.y) {
+                    return true;
+                }
+            }
+            return false;
         },
 
         getTilesInRange = function (tiles, range, startHex) {
