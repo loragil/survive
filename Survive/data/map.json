@@ -91,7 +91,7 @@
             { "sheet": "forestTile1", "coords":{"x":-3, "y":0}, "tileType": "mainIsland"},
             { "sheet": "forestTile1", "coords":{"x":-2, "y":0}, "tileType": "mainIsland"},
             { "sheet": "forestTile1", "coords":{"x":-1, "y":0}, "tileType": "mainIsland"},
-            { "sheet": "volcanoTile", "coords":{"x":0, "y":0}},
+            { "sheet": "seaTile1", "coords":{"x":0, "y":0}},
             { "sheet": "forestTile1", "coords":{"x":1, "y":0}, "tileType": "mainIsland"},
             { "sheet": "forestTile1", "coords":{"x":2, "y":0}, "tileType": "mainIsland"},
             { "sheet": "forestTile1", "coords":{"x":3, "y":0}, "tileType": "mainIsland"},

@@ -39,10 +39,10 @@
         return getCurrentPlayer().id === playerId;
     },
 
-    markTargetTiles = function (range, startHex) {
+    markTargetTiles = function (entity) {
         resetAllTiles();
         var allTiles = Q("Tile").items;
-        var targetTiles = game.mapUtils.getTilesInRange(allTiles, range, { coords: startHex });
+        var targetTiles = game.mapUtils.getTilesInRange(allTiles, entity);
 
         for (var i = 0; i < targetTiles.length; i++) {
             targetTiles[i].p.scale = 0.9;
@@ -68,7 +68,7 @@
     // todo: find a better file for this function
     onEntitySelected = function(entity) {
         setSelectedEntity(entity);
-        markTargetTiles(Q.state.get('playerMovementsLeft'), entity.p.coords);
+        markTargetTiles(entity);
     },
 
     // todo: find a better file for this function
@@ -116,7 +116,7 @@
         if (movementsLeft < 1) {
             entity.trigger('endTurn', entity); // todo: consider passing as a callback
         } else {
-            markTargetTiles(movementsLeft, entity.p.coords);
+            markTargetTiles(entity);
         }
     };
 

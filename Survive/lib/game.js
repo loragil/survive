@@ -53,9 +53,8 @@ window.addEventListener('load', function (ee) {
             if (entity && game.mapUtils.isValidMovement(entity, tile, movementsLeft)) {
                 game.logger.log("[ " + tile.p.coords.x + ", " + tile.p.coords.y + "]");
 
-                var distance = game.mapUtils.getDistance(entity.p.coords, tile.p.coords);
                 game.stateMgr.moveToTile(entity, tile);
-                game.stateMgr.decPlayerMovements(distance, entity);
+                game.stateMgr.decPlayerMovements(1, entity);
             }
         },
 

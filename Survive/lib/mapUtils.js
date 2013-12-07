@@ -1,5 +1,6 @@
 ﻿game.mapUtils = function () {
 
+    // todo: change to getAerialDistance
     var getDistance = function (from, to) {
         var dx = to.x - from.x,
             dy = to.y - from.y;
@@ -33,19 +34,39 @@
         },
 
         isValidMovement = function (entity, tile, movementsLeft) {
-            var distance = getDistance(entity.p.coords, tile.p.coords);
-            var isValidDistance = entity.p.movements >= distance && movementsLeft >= distance;
-
-            // todo: refactor
-            var isValidTile = (tile.p.sheet !== '') &&
-                            ((entity.p.type === Q.SPRITE_EXPLORER && tile.p.sheet.substring(0, 3) !== 'sea') ||
-                            (entity.p.type === Q.SPRITE_BOAT && tile.p.sheet.substring(0, 3) === 'sea'));
+            var isValidDistance = validateDistance(entity, tile, movementsLeft);
 
             if (entity.p.type === Q.SPRITE_BOAT) {
-                return isValidDistance && isValidTile && !tileContainsBoat(tile.p.coords);
+                return isValidDistance && validateBoatMove(entity, tile);
             }
             
-            return isValidDistance && isValidTile;
+            if (entity.p.type === Q.SPRITE_EXPLORER) {
+                return isValidDistance && validateExplorerMove(entity, tile);
+            }
+            
+            return false;
+        },
+        
+        validateBoatMove = function (entity, tile) {
+            var isValidTile = entity.p.type === Q.SPRITE_BOAT &&
+                            tile.p.sheet && tile.p.sheet.substring(0, 3) === 'sea';
+            
+            return isValidTile && !tileContainsBoat(tile.p.coords);
+        },
+        
+        validateExplorerMove = function (entity, tile) {
+            var isValidTile = entity.p.type === Q.SPRITE_EXPLORER &&
+                            tile.p.sheet
+                            && tile.p.sheet.substring(0, 3) !== 'sea'
+                            ;
+
+            return isValidTile;
+        },
+        
+        validateDistance = function (entity, tile, movementsLeft) {
+            var distance = getDistance(entity.p.coords, tile.p.coords);
+
+            return distance === 1 && movementsLeft >= distance;
         },
         
         tileContainsBoat = function (tileCoords) {
@@ -58,16 +79,21 @@
             }
             return false;
         },
-
-        getTilesInRange = function (tiles, range, startHex) {
+    
+        getTilesInRange = function (tiles, entity) {
             var result = [],
                 currentTile,
                 distance;
 
             for (var i = 0; i < tiles.length; i++) {
                 currentTile = tiles[i];
-                distance = getDistance(startHex.coords, currentTile.p.coords);
-                if (distance > 0 && distance <= range) {
+                distance = getDistance(entity.p.coords, currentTile.p.coords);
+                
+                var isValidTile = (currentTile.p.sheet !== '') &&
+                                    (entity.p.type === Q.SPRITE_EXPLORER || (entity.p.type === Q.SPRITE_BOAT && currentTile.p.sheet.substring(0, 3) === 'sea'));
+
+
+                if (distance === 1 && isValidTile) {
                     result.push(currentTile);
                 }
             }

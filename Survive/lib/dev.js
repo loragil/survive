@@ -2,7 +2,7 @@
 
     var initScene = function (stage) {
         // init stage
-        var position = game.mapUtils.getTilePositionByCoords({ x: 0, y: 0 }, stage.lists.Tile);
+        var position = game.mapUtils.getTilePositionByCoords({ x: 0, y: 1 }, stage.lists.Tile);
         var position2 = game.mapUtils.getTilePositionByCoords({ x: 1, y: 1 }, stage.lists.Tile);
         var position3 = game.mapUtils.getTilePositionByCoords({ x: -1, y: -1 }, stage.lists.Tile);
         var position4 = game.mapUtils.getTilePositionByCoords({ x: 2, y: 3 }, stage.lists.Tile);
@@ -13,7 +13,7 @@
         var boat = new Q.Boat({ playerId: 'yoyo11', x: position4.x, y: position4.y });
         var boat2 = new Q.Boat({ playerId: 'yoyo11', x: position5.x, y: position5.y });
 
-        exp.p.coords = { x: 0, y: 0 };
+        exp.p.coords = { x: 0, y: 1 };
         exp2.p.coords = { x: 1, y: 1 };
         exp3.p.coords = { x: -1, y: -1 };
         boat.p.coords = { x: 2, y: 3 };
