@@ -54,11 +54,18 @@
             return isValidTile && !tileContainsBoat(tile.p.coords);
         },
         
-        validateExplorerMove = function (entity, tile) {
-            var isValidTile = entity.p.type === Q.SPRITE_EXPLORER &&
+        validateExplorerMove = function (explorer, tile) {
+            var isValidTile = explorer.p.type === Q.SPRITE_EXPLORER &&
                             tile.p.sheet
-                            && tile.p.sheet.substring(0, 3) !== 'sea'
-                            ;
+                            /*&& tile.p.sheet.substring(0, 3) !== 'sea'*/;
+
+            // 1. if selected boat --> check boat is not full
+            // 2. if selected main island --> check that explorer hasn't left main island
+           
+            //once left the main island - explorer can no longer return
+            if (tile.p.tileType === "mainIsland" && explorer.p.hasLeftIsland) {
+                return false;
+            }
 
             return isValidTile;
         },

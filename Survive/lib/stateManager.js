@@ -57,16 +57,16 @@
             allTiles[i].p.scale = 1;
         }
     },
-        
+
     onEndTurn = function (entity) {
         game.logger.log(entity.p.playerId + ' turn ended.');
         setNextPlayer();
         setSelectedEntity(null);
         resetAllTiles();
     },
-        
+
     // todo: find a better file for this function
-    onEntitySelected = function(entity) {
+    onEntitySelected = function (entity) {
         setSelectedEntity(entity);
         markTargetTiles(entity);
     },
@@ -88,7 +88,21 @@
                 break;
         }
     },
-        
+
+    updateEntity = function (entity, tile) {
+        //todo:
+        //if on main island going to sea/boat --> set hasLeftIsland
+        //if on mainIsland/boatgoing to sea --> set isSwimming
+
+        switch (entity.p.type) {
+            case Q.SPRITE_EXPLORER:
+                if (tile.p.tileType !== "mainIsland") {
+                    entity.p.hasLeftIsland = true;
+                }
+                break;
+        }
+    },
+
     /************** private methods ****************/
 
     getNextPlayerId = function (currentPlayerId, players) {
@@ -124,6 +138,7 @@
         getSelectedEntity: getSelectedEntity,
         setSelectedEntity: setSelectedEntity,
         moveToTile: moveToTile,
+        updateEntity: updateEntity,
         isCurrentPlayerTurn: isCurrentPlayerTurn,
         decPlayerMovements: decPlayerMovements,
         resetAllTiles: resetAllTiles,

@@ -52,8 +52,8 @@ window.addEventListener('load', function (ee) {
             var movementsLeft = Q.state.get('playerMovementsLeft');
             if (entity && game.mapUtils.isValidMovement(entity, tile, movementsLeft)) {
                 game.logger.log("[ " + tile.p.coords.x + ", " + tile.p.coords.y + "]");
-
-                game.stateMgr.moveToTile(entity, tile);
+                game.stateMgr.updateEntity(entity, tile);
+                game.stateMgr.moveToTile(entity, tile);                
                 game.stateMgr.decPlayerMovements(1, entity);
             }
         },
