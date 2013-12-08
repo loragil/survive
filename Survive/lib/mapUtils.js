@@ -66,6 +66,9 @@
             if (tile.p.tileType === "mainIsland" && explorer.p.hasLeftIsland) {
                 return false;
             }
+            if (tile.p.sheet.substring(0, 3) === 'sea' && explorer.p.hasPlayedSeaTile) {
+                return false;
+            }
 
             return isValidTile;
         },

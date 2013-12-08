@@ -57,9 +57,20 @@
             allTiles[i].p.scale = 1;
         }
     },
+        
+    resetAllEntities = function (playerId) {
+        var explorers = Q("Explorer").items;
+        for (var i = 0; i < explorers.length; i++) {
+            if (explorers[i].p.playerId === playerId) {
+                explorers[i].p.hasPlayedSeaTile = false;
+            }
+        }
+    },
 
     onEndTurn = function (entity) {
-        game.logger.log(entity.p.playerId + ' turn ended.');
+        var currentPlayerId = Q.state.get('currentPlayerId');
+        game.logger.log(currentPlayerId + ' turn ended.');
+        resetAllEntities(currentPlayerId);
         setNextPlayer();
         setSelectedEntity(null);
         resetAllTiles();
@@ -98,6 +109,9 @@
             case Q.SPRITE_EXPLORER:
                 if (tile.p.tileType !== "mainIsland") {
                     entity.p.hasLeftIsland = true;
+                }
+                if (tile.p.sheet.substring(0, 3) === 'sea') {
+                    entity.p.hasPlayedSeaTile = true;
                 }
                 break;
         }
